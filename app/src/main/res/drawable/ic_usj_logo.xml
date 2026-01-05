@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="100"
+    android:viewportHeight="100">
+    
+    <!-- USJ Star Logo - Simplified vector representation -->
+    <!-- Center point -->
+    
+    <!-- Top ray (Yellow/Gold) -->
+    <path
+        android:fillColor="#FFB81C"
+        android:pathData="M50,10 L55,35 L50,50 L45,35 Z" />
+    
+    <!-- Top-right ray (Orange) -->
+    <path
+        android:fillColor="#E57200"
+        android:pathData="M75,20 L60,40 L50,50 L55,35 Z" />
+    
+    <!-- Right ray (Orange-Red) -->
+    <path
+        android:fillColor="#E55100"
+        android:pathData="M90,50 L65,55 L50,50 L65,45 Z" />
+    
+    <!-- Bottom-right ray (Red) -->
+    <path
+        android:fillColor="#C8102E"
+        android:pathData="M75,80 L60,60 L50,50 L65,55 Z" />
+    
+    <!-- Bottom ray (Dark Red) -->
+    <path
+        android:fillColor="#A00D24"
+        android:pathData="M50,90 L45,65 L50,50 L55,65 Z" />
+    
+    <!-- Bottom-left ray (Red) -->
+    <path
+        android:fillColor="#C8102E"
+        android:pathData="M25,80 L40,60 L50,50 L35,55 Z" />
+    
+    <!-- Left ray (Orange-Red) -->
+    <path
+        android:fillColor="#E55100"
+        android:pathData="M10,50 L35,45 L50,50 L35,55 Z" />
+    
+    <!-- Top-left ray (Orange) -->
+    <path
+        android:fillColor="#E57200"
+        android:pathData="M25,20 L40,40 L50,50 L45,35 Z" />
+    
+</vector>

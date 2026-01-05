@@ -7,27 +7,41 @@
     android:padding="32dp"
     tools:context=".NameInputActivity">
 
+    <ImageView
+        android:id="@+id/logoImage"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@drawable/ic_usj_logo"
+        android:contentDescription="@string/app_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/titleText"
+        app:layout_constraintVertical_chainStyle="packed" />
+
     <TextView
         android:id="@+id/titleText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:text="@string/app_name"
-        android:textSize="28sp"
+        android:textSize="32sp"
         android:textStyle="bold"
-        android:textColor="@color/primary_text"
+        android:textColor="@color/usj_red"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/nameInputCard"
-        app:layout_constraintVertical_chainStyle="packed" />
+        app:layout_constraintTop_toBottomOf="@+id/logoImage"
+        app:layout_constraintBottom_toTopOf="@+id/nameInputCard" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/nameInputCard"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        app:cardCornerRadius="12dp"
+        android:layout_marginTop="32dp"
+        app:cardCornerRadius="16dp"
         app:cardElevation="4dp"
+        app:strokeColor="@color/usj_orange"
+        app:strokeWidth="1dp"
         app:layout_constraintBottom_toTopOf="@+id/startGameButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -66,26 +80,34 @@
 
     </com.google.android.material.card.MaterialCardView>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/startGameButton"
         android:layout_width="0dp"
         android:layout_height="56dp"
         android:layout_marginTop="32dp"
         android:text="@string/start_game"
         android:textSize="16sp"
+        android:textColor="@color/white"
+        app:backgroundTint="@color/usj_red"
+        app:cornerRadius="12dp"
         app:layout_constraintBottom_toTopOf="@+id/continueGameButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/nameInputCard" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/continueGameButton"
         android:layout_width="0dp"
         android:layout_height="56dp"
         android:layout_marginTop="16dp"
         android:text="@string/continue_game"
         android:textSize="16sp"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:textColor="@color/usj_orange"
+        app:backgroundTint="@color/white"
+        app:strokeColor="@color/usj_orange"
+        app:strokeWidth="2dp"
+        app:cornerRadius="12dp"
+        style="@style/Widget.Material3.Button.OutlinedButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

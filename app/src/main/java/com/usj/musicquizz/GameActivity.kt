@@ -1,12 +1,13 @@
 package com.usj.musicquizz
 
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.media.AudioAttributes
 import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.button.MaterialButton
 import com.usj.musicquizz.databinding.ActivityGameBinding
 import com.usj.musicquizz.model.Song
 
@@ -67,6 +68,7 @@ class GameActivity : AppCompatActivity() {
     private fun pauseGame() {
         isPaused = true
         binding.pauseButton.text = getString(R.string.resume_game)
+        binding.pauseButton.setIconResource(android.R.drawable.ic_media_play)
         
         // Pause media player
         mediaPlayer?.pause()
@@ -82,6 +84,7 @@ class GameActivity : AppCompatActivity() {
     private fun resumeGame() {
         isPaused = false
         binding.pauseButton.text = getString(R.string.pause_game)
+        binding.pauseButton.setIconResource(android.R.drawable.ic_media_pause)
         
         // Resume media player
         mediaPlayer?.start()
@@ -180,7 +183,7 @@ class GameActivity : AppCompatActivity() {
         // Update UI
         binding.questionText.text = getString(R.string.which_song)
         binding.pointsText.text = currentScore.toString()
-        binding.questionNumberText.text = getString(R.string.question_number, currentQuestion + 1, quizSongs.size)
+        binding.questionNumberText.text = "${currentQuestion + 1}/${quizSongs.size}"
         
         binding.optionA.text = currentOptions[0].name
         binding.optionB.text = currentOptions[1].name
@@ -294,7 +297,7 @@ class GameActivity : AppCompatActivity() {
         val correctIndex = currentOptions.indexOfFirst { it.id == correctAnswer?.id }
         
         if (isCorrect) {
-            buttons[optionIndex].setBackgroundColor(getColor(R.color.correct_answer))
+            setButtonColor(buttons[optionIndex], R.color.correct_answer)
             
             // Calculate score
             val timeElapsed = (System.currentTimeMillis() - questionStartTime) / 1000.0
@@ -308,8 +311,8 @@ class GameActivity : AppCompatActivity() {
             
             binding.pointsText.text = currentScore.toString()
         } else {
-            buttons[optionIndex].setBackgroundColor(getColor(R.color.wrong_answer))
-            buttons[correctIndex].setBackgroundColor(getColor(R.color.correct_answer))
+            setButtonColor(buttons[optionIndex], R.color.wrong_answer)
+            setButtonColor(buttons[correctIndex], R.color.correct_answer)
             currentStreak = 0
         }
         
@@ -331,7 +334,7 @@ class GameActivity : AppCompatActivity() {
         // Highlight correct answer
         val buttons = listOf(binding.optionA, binding.optionB, binding.optionC, binding.optionD)
         val correctIndex = currentOptions.indexOfFirst { it.id == correctAnswer?.id }
-        buttons[correctIndex].setBackgroundColor(getColor(R.color.correct_answer))
+        setButtonColor(buttons[correctIndex], R.color.correct_answer)
         
         saveGameState()
         
@@ -343,6 +346,12 @@ class GameActivity : AppCompatActivity() {
         }, 2000)
     }
 
+    private fun setButtonColor(button: MaterialButton, colorResId: Int) {
+        button.backgroundTintList = ColorStateList.valueOf(getColor(colorResId))
+        button.setTextColor(getColor(R.color.white))
+        button.strokeWidth = 0
+    }
+
     private fun enableButtons(enabled: Boolean) {
         binding.optionA.isEnabled = enabled
         binding.optionB.isEnabled = enabled
@@ -351,11 +360,18 @@ class GameActivity : AppCompatActivity() {
     }
 
     private fun resetButtonColors() {
-        val defaultColor = getColor(R.color.button_default)
-        binding.optionA.setBackgroundColor(defaultColor)
-        binding.optionB.setBackgroundColor(defaultColor)
-        binding.optionC.setBackgroundColor(defaultColor)
-        binding.optionD.setBackgroundColor(defaultColor)
+        val buttons = listOf(binding.optionA, binding.optionB, binding.optionC, binding.optionD)
+        val defaultColor = ColorStateList.valueOf(getColor(R.color.white))
+        val strokeColor = ColorStateList.valueOf(getColor(R.color.usj_orange))
+        val textColor = getColor(R.color.primary_text)
+        val strokeWidthPx = (2 * resources.displayMetrics.density).toInt()
+
+        buttons.forEach { button ->
+            button.backgroundTintList = defaultColor
+            button.setTextColor(textColor)
+            button.strokeColor = strokeColor
+            button.strokeWidth = strokeWidthPx
+        }
     }
 
     private fun finishGame() {

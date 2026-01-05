@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="100"
+    android:viewportHeight="100">
+    
+    <!-- Headset band (Dark teal) -->
+    <path
+        android:fillColor="#1A535C"
+        android:strokeWidth="0"
+        android:pathData="M20,50 Q20,20 50,20 Q80,20 80,50 L75,50 Q75,25 50,25 Q25,25 25,50 Z" />
+    
+    <!-- Left ear cup (Orange) -->
+    <path
+        android:fillColor="#FF8C5A"
+        android:pathData="M15,45 Q10,45 10,55 Q10,65 15,65 Q20,65 20,55 Q20,45 15,45 Z" />
+    <path
+        android:fillColor="#E57200"
+        android:pathData="M20,48 Q17,48 17,55 Q17,62 20,62 Q23,62 23,55 Q23,48 20,48 Z" />
+    
+    <!-- Right ear cup (Red/Pink) -->
+    <path
+        android:fillColor="#EF5350"
+        android:pathData="M85,45 Q90,45 90,55 Q90,65 85,65 Q80,65 80,55 Q80,45 85,45 Z" />
+    <path
+        android:fillColor="#C8102E"
+        android:pathData="M80,48 Q83,48 83,55 Q83,62 80,62 Q77,62 77,55 Q77,48 80,48 Z" />
+    
+    <!-- Microphone arm -->
+    <path
+        android:fillColor="#1A535C"
+        android:pathData="M80,58 Q85,65 75,75 L72,72 Q80,62 77,58 Z" />
+    
+    <!-- Light bulb (Yellow) - represents the question/idea -->
+    <path
+        android:fillColor="#FFE082"
+        android:pathData="M50,35 Q35,35 35,50 Q35,62 45,67 L45,75 L55,75 L55,67 Q65,62 65,50 Q65,35 50,35 Z" />
+    
+    <!-- Light bulb highlight -->
+    <path
+        android:fillColor="#FFB81C"
+        android:pathData="M50,35 Q57,35 60,42 Q65,50 60,58 Q57,62 55,65 L55,67 Q65,62 65,50 Q65,35 50,35 Z" />
+    
+    <!-- Light bulb base -->
+    <path
+        android:fillColor="#90A4AE"
+        android:pathData="M45,75 L45,80 L55,80 L55,75 Z" />
+    
+    <!-- Question mark (Dark teal) -->
+    <path
+        android:fillColor="#1A535C"
+        android:pathData="M47,45 Q47,42 50,42 Q53,42 53,45 Q53,48 50,50 L50,55 L50,55 
+        M50,58 L50,62" 
+        android:strokeColor="#1A535C"
+        android:strokeWidth="3"
+        android:strokeLineCap="round" />
+    
+</vector>

@@ -1,7 +1,29 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+    <!-- Base application theme with USJ colors (Dark mode) -->
     <style name="Base.Theme.Musicquizz" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <!-- Primary brand color (USJ Red) -->
+        <item name="colorPrimary">@color/usj_red</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimaryContainer">#930012</item>
+        <item name="colorOnPrimaryContainer">#FFDAD6</item>
+        
+        <!-- Secondary brand color (USJ Orange) -->
+        <item name="colorSecondary">@color/usj_orange</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="colorSecondaryContainer">#5C3D00</item>
+        <item name="colorOnSecondaryContainer">#FFE0B2</item>
+        
+        <!-- Tertiary brand color (USJ Yellow) -->
+        <item name="colorTertiary">@color/usj_yellow</item>
+        <item name="colorOnTertiary">#3F2E00</item>
+        
+        <!-- Background colors for dark mode -->
+        <item name="android:colorBackground">#1C1B1F</item>
+        <item name="colorOnBackground">#E6E1E5</item>
+        <item name="colorSurface">#1C1B1F</item>
+        <item name="colorOnSurface">#E6E1E5</item>
+        
+        <!-- Status bar -->
+        <item name="android:statusBarColor">@color/usj_dark_red</item>
     </style>
 </resources>

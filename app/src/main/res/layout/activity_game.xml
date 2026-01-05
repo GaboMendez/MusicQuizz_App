@@ -57,54 +57,94 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/seekBar">
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/optionA"
             android:layout_width="0dp"
-            android:layout_height="80dp"
-            android:layout_margin="8dp"
+            android:layout_height="90dp"
+            android:layout_margin="6dp"
             android:text="A"
             android:textSize="14sp"
             android:textAllCaps="false"
-            android:backgroundTint="@color/button_default"
+            android:textColor="@color/primary_text"
+            android:padding="12dp"
+            android:gravity="center"
+            android:ellipsize="end"
+            android:maxLines="3"
+            app:backgroundTint="@color/white"
+            app:strokeColor="@color/usj_orange"
+            app:strokeWidth="2dp"
+            app:cornerRadius="12dp"
+            app:rippleColor="@color/usj_yellow"
+            style="@style/Widget.Material3.Button.OutlinedButton"
             app:layout_column="0"
             app:layout_row="0"
             app:layout_columnWeight="1" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/optionB"
             android:layout_width="0dp"
-            android:layout_height="80dp"
-            android:layout_margin="8dp"
+            android:layout_height="90dp"
+            android:layout_margin="6dp"
             android:text="B"
             android:textSize="14sp"
             android:textAllCaps="false"
-            android:backgroundTint="@color/button_default"
+            android:textColor="@color/primary_text"
+            android:padding="12dp"
+            android:gravity="center"
+            android:ellipsize="end"
+            android:maxLines="3"
+            app:backgroundTint="@color/white"
+            app:strokeColor="@color/usj_orange"
+            app:strokeWidth="2dp"
+            app:cornerRadius="12dp"
+            app:rippleColor="@color/usj_yellow"
+            style="@style/Widget.Material3.Button.OutlinedButton"
             app:layout_column="1"
             app:layout_row="0"
             app:layout_columnWeight="1" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/optionC"
             android:layout_width="0dp"
-            android:layout_height="80dp"
-            android:layout_margin="8dp"
+            android:layout_height="90dp"
+            android:layout_margin="6dp"
             android:text="C"
             android:textSize="14sp"
             android:textAllCaps="false"
-            android:backgroundTint="@color/button_default"
+            android:textColor="@color/primary_text"
+            android:padding="12dp"
+            android:gravity="center"
+            android:ellipsize="end"
+            android:maxLines="3"
+            app:backgroundTint="@color/white"
+            app:strokeColor="@color/usj_orange"
+            app:strokeWidth="2dp"
+            app:cornerRadius="12dp"
+            app:rippleColor="@color/usj_yellow"
+            style="@style/Widget.Material3.Button.OutlinedButton"
             app:layout_column="0"
             app:layout_row="1"
             app:layout_columnWeight="1" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/optionD"
             android:layout_width="0dp"
-            android:layout_height="80dp"
-            android:layout_margin="8dp"
+            android:layout_height="90dp"
+            android:layout_margin="6dp"
             android:text="D"
             android:textSize="14sp"
             android:textAllCaps="false"
-            android:backgroundTint="@color/button_default"
+            android:textColor="@color/primary_text"
+            android:padding="12dp"
+            android:gravity="center"
+            android:ellipsize="end"
+            android:maxLines="3"
+            app:backgroundTint="@color/white"
+            app:strokeColor="@color/usj_orange"
+            app:strokeWidth="2dp"
+            app:cornerRadius="12dp"
+            app:rippleColor="@color/usj_yellow"
+            style="@style/Widget.Material3.Button.OutlinedButton"
             app:layout_column="1"
             app:layout_row="1"
             app:layout_columnWeight="1" />
@@ -114,46 +154,87 @@
     <!-- Score Panel -->
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/scoreCard"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        app:cardCornerRadius="12dp"
-        app:cardElevation="4dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginHorizontal="32dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="6dp"
+        app:strokeColor="@color/usj_yellow"
+        app:strokeWidth="2dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/optionsGrid">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="24dp"
+            android:orientation="horizontal"
+            android:padding="16dp"
             android:gravity="center">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <!-- Points Section -->
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/points"
-                android:textSize="14sp"
-                android:textColor="@color/secondary_text" />
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center">
 
-            <TextView
-                android:id="@+id/pointsText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="0"
-                android:textSize="32sp"
-                android:textStyle="bold"
-                android:textColor="@color/score_color" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/points"
+                    android:textSize="12sp"
+                    android:textAllCaps="true"
+                    android:letterSpacing="0.1"
+                    android:textColor="@color/secondary_text" />
 
-            <TextView
-                android:id="@+id/questionNumberText"
-                android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/pointsText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textSize="36sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/usj_orange" />
+
+            </LinearLayout>
+
+            <!-- Divider -->
+            <View
+                android:layout_width="1dp"
+                android:layout_height="50dp"
+                android:layout_marginHorizontal="16dp"
+                android:background="@color/button_default_stroke" />
+
+            <!-- Question Number Section -->
+            <LinearLayout
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@string/question_label"
-                android:textSize="14sp"
-                android:textColor="@color/secondary_text" />
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/question_label"
+                    android:textSize="12sp"
+                    android:textAllCaps="true"
+                    android:letterSpacing="0.1"
+                    android:textColor="@color/secondary_text" />
+
+                <TextView
+                    android:id="@+id/questionNumberText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1/10"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/usj_red" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -162,30 +243,47 @@
     <!-- Game Control Buttons -->
     <LinearLayout
         android:id="@+id/controlButtons"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginHorizontal="32dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/scoreCard">
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/pauseButton"
-            android:layout_width="wrap_content"
-            android:layout_height="48dp"
-            android:layout_marginEnd="16dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="52dp"
+            android:layout_marginEnd="8dp"
             android:text="@string/pause_game"
             android:textSize="14sp"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+            android:textColor="@color/usj_orange"
+            app:icon="@android:drawable/ic_media_pause"
+            app:iconTint="@color/usj_orange"
+            app:iconGravity="textStart"
+            app:backgroundTint="@color/white"
+            app:strokeColor="@color/usj_orange"
+            app:strokeWidth="2dp"
+            app:cornerRadius="12dp"
+            style="@style/Widget.Material3.Button.OutlinedButton" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/stopButton"
-            android:layout_width="wrap_content"
-            android:layout_height="48dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="52dp"
+            android:layout_marginStart="8dp"
             android:text="@string/stop_game"
             android:textSize="14sp"
-            android:backgroundTint="@color/wrong_answer" />
+            android:textColor="@color/white"
+            app:icon="@android:drawable/ic_menu_close_clear_cancel"
+            app:iconTint="@color/white"
+            app:iconGravity="textStart"
+            app:backgroundTint="@color/usj_red"
+            app:cornerRadius="12dp" />
 
     </LinearLayout>
 
