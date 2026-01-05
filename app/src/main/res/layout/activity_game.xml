@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="24dp"
+    tools:context=".GameActivity">
+
+    <!-- Question Text -->
+    <TextView
+        android:id="@+id/questionText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/which_song"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@color/primary_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Timer -->
+    <TextView
+        android:id="@+id/timerText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="0:15"
+        android:textSize="36sp"
+        android:textStyle="bold"
+        android:textColor="@color/timer_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/questionText" />
+
+    <!-- SeekBar for music progress -->
+    <SeekBar
+        android:id="@+id/seekBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/timerText" />
+
+    <!-- Answer Options Grid -->
+    <androidx.gridlayout.widget.GridLayout
+        android:id="@+id/optionsGrid"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        app:columnCount="2"
+        app:rowCount="2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/seekBar">
+
+        <Button
+            android:id="@+id/optionA"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:layout_margin="8dp"
+            android:text="A"
+            android:textSize="14sp"
+            android:textAllCaps="false"
+            android:backgroundTint="@color/button_default"
+            app:layout_column="0"
+            app:layout_row="0"
+            app:layout_columnWeight="1" />
+
+        <Button
+            android:id="@+id/optionB"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:layout_margin="8dp"
+            android:text="B"
+            android:textSize="14sp"
+            android:textAllCaps="false"
+            android:backgroundTint="@color/button_default"
+            app:layout_column="1"
+            app:layout_row="0"
+            app:layout_columnWeight="1" />
+
+        <Button
+            android:id="@+id/optionC"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:layout_margin="8dp"
+            android:text="C"
+            android:textSize="14sp"
+            android:textAllCaps="false"
+            android:backgroundTint="@color/button_default"
+            app:layout_column="0"
+            app:layout_row="1"
+            app:layout_columnWeight="1" />
+
+        <Button
+            android:id="@+id/optionD"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:layout_margin="8dp"
+            android:text="D"
+            android:textSize="14sp"
+            android:textAllCaps="false"
+            android:backgroundTint="@color/button_default"
+            app:layout_column="1"
+            app:layout_row="1"
+            app:layout_columnWeight="1" />
+
+    </androidx.gridlayout.widget.GridLayout>
+
+    <!-- Score Panel -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/scoreCard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/optionsGrid">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/points"
+                android:textSize="14sp"
+                android:textColor="@color/secondary_text" />
+
+            <TextView
+                android:id="@+id/pointsText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textSize="32sp"
+                android:textStyle="bold"
+                android:textColor="@color/score_color" />
+
+            <TextView
+                android:id="@+id/questionNumberText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/question_label"
+                android:textSize="14sp"
+                android:textColor="@color/secondary_text" />
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,3 +1,28 @@
 <resources>
-    <string name="app_name">musicquizz</string>
+    <string name="app_name">Music Quizz</string>
+    
+    <!-- Splash Screen -->
+    <string name="loading_songs">Cargando canciones…</string>
+    <string name="songs_loaded">%d canciones cargadas</string>
+    <string name="error_loading_songs">Error al cargar canciones. Reintentando…</string>
+    
+    <!-- Name Input Screen -->
+    <string name="enter_name">Introduce tu nombre de jugador</string>
+    <string name="enter_name_hint">Tu nombre</string>
+    <string name="start_game">Empezar juego</string>
+    <string name="continue_game">Continuar juego</string>
+    
+    <!-- Game Screen -->
+    <string name="which_song">¿Qué canción es esta?</string>
+    <string name="points">Puntos</string>
+    <string name="question_label">Pregunta</string>
+    <string name="question_number">Pregunta:\n%1$d/%2$d</string>
+    
+    <!-- Results Screen -->
+    <string name="congrats">¡Felicidades!</string>
+    <string name="congrats_player">¡Felicidades, %s!</string>
+    <string name="final_score">Puntuación Final</string>
+    <string name="score_percentage">%d%% del máximo posible</string>
+    <string name="play_again">Jugar de nuevo</string>
+    <string name="exit">Salir</string>
 </resources>
