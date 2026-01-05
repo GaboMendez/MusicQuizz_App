@@ -36,7 +36,7 @@ class SplashActivity : AppCompatActivity() {
         scope.launch {
             try {
                 withContext(Dispatchers.Main) {
-                    binding.statusText.text = getString(com.usj.musicquizz.R.string.loading_songs)
+                    binding.statusText.text = getString(R.string.loading_songs)
                 }
                 
                 val songs = songsServiceApi.findAll()

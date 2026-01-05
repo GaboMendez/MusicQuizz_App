@@ -13,7 +13,7 @@ buildscript {
 }
 
 android {
-    namespace = "com.usj.musicquizz"
+    namespace = "com.usj.musicquizz.api"
     compileSdk = 34
 
     defaultConfig {
