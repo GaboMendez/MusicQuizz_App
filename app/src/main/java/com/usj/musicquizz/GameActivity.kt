@@ -6,24 +6,13 @@ import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.widget.Button
-import android.widget.SeekBar
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.usj.musicquizz.databinding.ActivityGameBinding
 import com.usj.musicquizz.model.Song
 
 class GameActivity : AppCompatActivity() {
 
-    private lateinit var questionText: TextView
-    private lateinit var timerText: TextView
-    private lateinit var seekBar: SeekBar
-    private lateinit var pointsText: TextView
-    private lateinit var questionNumberText: TextView
-    private lateinit var optionA: Button
-    private lateinit var optionB: Button
-    private lateinit var optionC: Button
-    private lateinit var optionD: Button
-    private lateinit var pauseButton: Button
-    private lateinit var stopButton: Button
+    private lateinit var binding: ActivityGameBinding
 
     private var mediaPlayer: MediaPlayer? = null
     private var isPaused = false
@@ -42,7 +31,8 @@ class GameActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_game)
+        binding = ActivityGameBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         initViews()
         
@@ -55,28 +45,15 @@ class GameActivity : AppCompatActivity() {
     }
 
     private fun initViews() {
-        questionText = findViewById(R.id.questionText)
-        timerText = findViewById(R.id.timerText)
-        seekBar = findViewById(R.id.seekBar)
-        pointsText = findViewById(R.id.pointsText)
-        questionNumberText = findViewById(R.id.questionNumberText)
-        optionA = findViewById(R.id.optionA)
-        optionB = findViewById(R.id.optionB)
-        optionC = findViewById(R.id.optionC)
-        optionD = findViewById(R.id.optionD)
-
-        seekBar.isEnabled = false
+        binding.seekBar.isEnabled = false
         
-        optionA.setOnClickListener { checkAnswer(0) }
-        optionB.setOnClickListener { checkAnswer(1) }
-        optionC.setOnClickListener { checkAnswer(2) }
-        optionD.setOnClickListener { checkAnswer(3) }
+        binding.optionA.setOnClickListener { checkAnswer(0) }
+        binding.optionB.setOnClickListener { checkAnswer(1) }
+        binding.optionC.setOnClickListener { checkAnswer(2) }
+        binding.optionD.setOnClickListener { checkAnswer(3) }
         
-        pauseButton = findViewById(R.id.pauseButton)
-        stopButton = findViewById(R.id.stopButton)
-        
-        pauseButton.setOnClickListener { togglePause() }
-        stopButton.setOnClickListener { stopGame() }
+        binding.pauseButton.setOnClickListener { togglePause() }
+        binding.stopButton.setOnClickListener { stopGame() }
     }
     
     private fun togglePause() {
@@ -89,7 +66,7 @@ class GameActivity : AppCompatActivity() {
     
     private fun pauseGame() {
         isPaused = true
-        pauseButton.text = getString(R.string.resume_game)
+        binding.pauseButton.text = getString(R.string.resume_game)
         
         // Pause media player
         mediaPlayer?.pause()
@@ -104,7 +81,7 @@ class GameActivity : AppCompatActivity() {
     
     private fun resumeGame() {
         isPaused = false
-        pauseButton.text = getString(R.string.pause_game)
+        binding.pauseButton.text = getString(R.string.pause_game)
         
         // Resume media player
         mediaPlayer?.start()
@@ -201,14 +178,14 @@ class GameActivity : AppCompatActivity() {
         currentOptions = (listOf(correctAnswer!!) + wrongOptions).shuffled()
         
         // Update UI
-        questionText.text = getString(R.string.which_song)
-        pointsText.text = currentScore.toString()
-        questionNumberText.text = getString(R.string.question_number, currentQuestion + 1, quizSongs.size)
+        binding.questionText.text = getString(R.string.which_song)
+        binding.pointsText.text = currentScore.toString()
+        binding.questionNumberText.text = getString(R.string.question_number, currentQuestion + 1, quizSongs.size)
         
-        optionA.text = currentOptions[0].name
-        optionB.text = currentOptions[1].name
-        optionC.text = currentOptions[2].name
-        optionD.text = currentOptions[3].name
+        binding.optionA.text = currentOptions[0].name
+        binding.optionB.text = currentOptions[1].name
+        binding.optionC.text = currentOptions[2].name
+        binding.optionD.text = currentOptions[3].name
         
         // Start playing the song
         playSong(correctAnswer!!)
@@ -252,13 +229,13 @@ class GameActivity : AppCompatActivity() {
     }
 
     private fun setupSeekBar(mp: MediaPlayer) {
-        seekBar.max = mp.duration
+        binding.seekBar.max = mp.duration
         
         seekBarTimer?.cancel()
         seekBarTimer = object : CountDownTimer(MusicQuizzApp.MAX_TIME_SECONDS * 1000L, 100) {
             override fun onTick(millisUntilFinished: Long) {
                 if (mediaPlayer?.isPlaying == true) {
-                    seekBar.progress = mediaPlayer?.currentPosition ?: 0
+                    binding.seekBar.progress = mediaPlayer?.currentPosition ?: 0
                 }
             }
 
@@ -278,12 +255,12 @@ class GameActivity : AppCompatActivity() {
             override fun onTick(millisUntilFinished: Long) {
                 remainingTimeMillis = millisUntilFinished
                 val seconds = (millisUntilFinished / 1000).toInt()
-                timerText.text = formatTime(seconds)
+                binding.timerText.text = formatTime(seconds)
             }
 
             override fun onFinish() {
                 remainingTimeMillis = 0L
-                timerText.text = formatTime(0)
+                binding.timerText.text = formatTime(0)
                 if (!isAnswered) {
                     handleTimeout()
                 }
@@ -313,7 +290,7 @@ class GameActivity : AppCompatActivity() {
         val isCorrect = selectedSong.id == correctAnswer?.id
         
         // Highlight correct and wrong answers
-        val buttons = listOf(optionA, optionB, optionC, optionD)
+        val buttons = listOf(binding.optionA, binding.optionB, binding.optionC, binding.optionD)
         val correctIndex = currentOptions.indexOfFirst { it.id == correctAnswer?.id }
         
         if (isCorrect) {
@@ -329,7 +306,7 @@ class GameActivity : AppCompatActivity() {
             val questionScore = MusicQuizzApp.BASE_POINTS + timeBonus + streakBonus
             currentScore += questionScore
             
-            pointsText.text = currentScore.toString()
+            binding.pointsText.text = currentScore.toString()
         } else {
             buttons[optionIndex].setBackgroundColor(getColor(R.color.wrong_answer))
             buttons[correctIndex].setBackgroundColor(getColor(R.color.correct_answer))
@@ -339,7 +316,7 @@ class GameActivity : AppCompatActivity() {
         saveGameState()
         
         // Move to next question after a delay
-        questionText.postDelayed({
+        binding.questionText.postDelayed({
             currentQuestion++
             saveGameState()
             loadQuestion()
@@ -352,14 +329,14 @@ class GameActivity : AppCompatActivity() {
         currentStreak = 0
         
         // Highlight correct answer
-        val buttons = listOf(optionA, optionB, optionC, optionD)
+        val buttons = listOf(binding.optionA, binding.optionB, binding.optionC, binding.optionD)
         val correctIndex = currentOptions.indexOfFirst { it.id == correctAnswer?.id }
         buttons[correctIndex].setBackgroundColor(getColor(R.color.correct_answer))
         
         saveGameState()
         
         // Move to next question after a delay
-        questionText.postDelayed({
+        binding.questionText.postDelayed({
             currentQuestion++
             saveGameState()
             loadQuestion()
@@ -367,18 +344,18 @@ class GameActivity : AppCompatActivity() {
     }
 
     private fun enableButtons(enabled: Boolean) {
-        optionA.isEnabled = enabled
-        optionB.isEnabled = enabled
-        optionC.isEnabled = enabled
-        optionD.isEnabled = enabled
+        binding.optionA.isEnabled = enabled
+        binding.optionB.isEnabled = enabled
+        binding.optionC.isEnabled = enabled
+        binding.optionD.isEnabled = enabled
     }
 
     private fun resetButtonColors() {
         val defaultColor = getColor(R.color.button_default)
-        optionA.setBackgroundColor(defaultColor)
-        optionB.setBackgroundColor(defaultColor)
-        optionC.setBackgroundColor(defaultColor)
-        optionD.setBackgroundColor(defaultColor)
+        binding.optionA.setBackgroundColor(defaultColor)
+        binding.optionB.setBackgroundColor(defaultColor)
+        binding.optionC.setBackgroundColor(defaultColor)
+        binding.optionD.setBackgroundColor(defaultColor)
     }
 
     private fun finishGame() {

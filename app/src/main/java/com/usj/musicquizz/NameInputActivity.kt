@@ -2,24 +2,18 @@ package com.usj.musicquizz
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.usj.musicquizz.databinding.ActivityNameInputBinding
 
 class NameInputActivity : AppCompatActivity() {
 
-    private lateinit var nameEditText: EditText
-    private lateinit var startGameButton: Button
-    private lateinit var continueGameButton: Button
+    private lateinit var binding: ActivityNameInputBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_name_input)
-
-        nameEditText = findViewById(R.id.nameEditText)
-        startGameButton = findViewById(R.id.startGameButton)
-        continueGameButton = findViewById(R.id.continueGameButton)
+        binding = ActivityNameInputBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         // Check if there's a saved game
         val prefs = getSharedPreferences("music_quizz", MODE_PRIVATE)
@@ -27,14 +21,14 @@ class NameInputActivity : AppCompatActivity() {
         val hasSavedGame = prefs.getBoolean("has_saved_game", false)
 
         if (!savedName.isNullOrEmpty()) {
-            nameEditText.setText(savedName)
+            binding.nameEditText.setText(savedName)
         }
 
-        continueGameButton.isEnabled = hasSavedGame
-        continueGameButton.alpha = if (hasSavedGame) 1.0f else 0.5f
+        binding.continueGameButton.isEnabled = hasSavedGame
+        binding.continueGameButton.alpha = if (hasSavedGame) 1.0f else 0.5f
 
-        startGameButton.setOnClickListener {
-            val name = nameEditText.text.toString().trim()
+        binding.startGameButton.setOnClickListener {
+            val name = binding.nameEditText.text.toString().trim()
             if (name.isEmpty()) {
                 Toast.makeText(this, getString(R.string.enter_name_hint), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
@@ -44,8 +38,8 @@ class NameInputActivity : AppCompatActivity() {
             startNewGame()
         }
 
-        continueGameButton.setOnClickListener {
-            val name = nameEditText.text.toString().trim()
+        binding.continueGameButton.setOnClickListener {
+            val name = binding.nameEditText.text.toString().trim()
             if (name.isEmpty()) {
                 Toast.makeText(this, getString(R.string.enter_name_hint), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener

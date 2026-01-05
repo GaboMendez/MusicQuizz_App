@@ -2,53 +2,43 @@ package com.usj.musicquizz
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.usj.musicquizz.databinding.ActivityResultsBinding
 
 class ResultsActivity : AppCompatActivity() {
 
-    private lateinit var congratsText: TextView
-    private lateinit var scoreText: TextView
-    private lateinit var scoreLabel: TextView
-    private lateinit var playAgainButton: Button
-    private lateinit var exitButton: Button
+    private lateinit var binding: ActivityResultsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_results)
-
-        congratsText = findViewById(R.id.congratsText)
-        scoreText = findViewById(R.id.scoreText)
-        scoreLabel = findViewById(R.id.scoreLabel)
-        playAgainButton = findViewById(R.id.playAgainButton)
-        exitButton = findViewById(R.id.exitButton)
+        binding = ActivityResultsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         val score = intent.getIntExtra("score", 0)
         val totalQuestions = intent.getIntExtra("total_questions", MusicQuizzApp.TOTAL_QUESTIONS)
         val playerName = (application as MusicQuizzApp).playerName
 
-        congratsText.text = getString(R.string.congrats_player, playerName)
-        scoreText.text = score.toString()
+        binding.congratsText.text = getString(R.string.congrats_player, playerName)
+        binding.scoreText.text = score.toString()
         
         // Calculate max possible score for reference
         val maxPossibleScore = totalQuestions * (MusicQuizzApp.BASE_POINTS + MusicQuizzApp.TIME_BONUS_MAX) + 
             (1 until totalQuestions).sum() * MusicQuizzApp.STREAK_BONUS
         
         val percentage = (score.toFloat() / maxPossibleScore * 100).toInt()
-        scoreLabel.text = getString(R.string.score_percentage, percentage)
+        binding.scoreLabel.text = getString(R.string.score_percentage, percentage)
 
         // Save high score
         saveHighScore(playerName, score)
 
-        playAgainButton.setOnClickListener {
+        binding.playAgainButton.setOnClickListener {
             val intent = Intent(this, NameInputActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
             startActivity(intent)
             finish()
         }
 
-        exitButton.setOnClickListener {
+        binding.exitButton.setOnClickListener {
             finishAffinity()
         }
     }
