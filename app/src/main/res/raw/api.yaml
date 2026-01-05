@@ -1,0 +1,104 @@
+openapi: 3.0.1
+info:
+  title: Api Documentation
+  description: Api Documentation
+  termsOfService: urn:tos
+  contact: {}
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0
+  version: "1.0"
+servers:
+- url: //10.0.2.2:8080/MusicQuiz/api
+tags:
+- name: songs-service
+  description: Web service API description for Music Quiz practice.
+paths:
+  /songs:
+    get:
+      tags:
+      - songs-service
+      summary: findAll
+      description: Endpoint to return the whole list of songs.
+      operationId: findAll
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Songs'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+        500:
+          description: Server Error
+          content: {}
+      deprecated: false
+  /songs/{id}:
+    get:
+      tags:
+      - songs-service
+      summary: getById
+      description: Endpoint to get one song by its id.
+      operationId: getById
+      parameters:
+      - name: id
+        in: path
+        description: Song id to retrieve.
+        required: true
+        schema:
+          type: integer
+          format: int32
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Song'
+        401:
+          description: Unauthorized
+          content: {}
+        403:
+          description: Forbidden
+          content: {}
+        404:
+          description: Not Found
+          content: {}
+        500:
+          description: Server Error
+          content: {}
+      deprecated: false
+components:
+  schemas:
+    Songs:
+      type: array
+      items:
+        $ref: '#/components/schemas/Song'
+    Song:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          nullable: false
+        name:
+          type: string
+          nullable: false
+        author:
+          type: string
+          nullable: false
+        file:
+          type: string
+          nullable: false
+        lenght:
+          type: integer
+          format: int64
+          nullable: false
