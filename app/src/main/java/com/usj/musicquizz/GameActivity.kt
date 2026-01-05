@@ -22,8 +22,12 @@ class GameActivity : AppCompatActivity() {
     private lateinit var optionB: Button
     private lateinit var optionC: Button
     private lateinit var optionD: Button
+    private lateinit var pauseButton: Button
+    private lateinit var stopButton: Button
 
     private var mediaPlayer: MediaPlayer? = null
+    private var isPaused = false
+    private var remainingTimeMillis = 0L
     private var countDownTimer: CountDownTimer? = null
     private var seekBarTimer: CountDownTimer? = null
 
@@ -67,6 +71,64 @@ class GameActivity : AppCompatActivity() {
         optionB.setOnClickListener { checkAnswer(1) }
         optionC.setOnClickListener { checkAnswer(2) }
         optionD.setOnClickListener { checkAnswer(3) }
+        
+        pauseButton = findViewById(R.id.pauseButton)
+        stopButton = findViewById(R.id.stopButton)
+        
+        pauseButton.setOnClickListener { togglePause() }
+        stopButton.setOnClickListener { stopGame() }
+    }
+    
+    private fun togglePause() {
+        if (isPaused) {
+            resumeGame()
+        } else {
+            pauseGame()
+        }
+    }
+    
+    private fun pauseGame() {
+        isPaused = true
+        pauseButton.text = getString(R.string.resume_game)
+        
+        // Pause media player
+        mediaPlayer?.pause()
+        
+        // Cancel and save remaining time
+        countDownTimer?.cancel()
+        seekBarTimer?.cancel()
+        
+        // Disable answer buttons while paused
+        enableButtons(false)
+    }
+    
+    private fun resumeGame() {
+        isPaused = false
+        pauseButton.text = getString(R.string.pause_game)
+        
+        // Resume media player
+        mediaPlayer?.start()
+        
+        // Restart timer with remaining time
+        startTimerWithRemaining(remainingTimeMillis)
+        
+        // Re-enable answer buttons if not already answered
+        if (!isAnswered) {
+            enableButtons(true)
+        }
+    }
+    
+    private fun stopGame() {
+        // Save current state and go back to name input
+        saveGameState()
+        stopMediaPlayer()
+        countDownTimer?.cancel()
+        seekBarTimer?.cancel()
+        
+        val intent = Intent(this, NameInputActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        startActivity(intent)
+        finish()
     }
 
     private fun startNewGame() {
@@ -205,21 +267,33 @@ class GameActivity : AppCompatActivity() {
     }
 
     private fun startTimer() {
+        remainingTimeMillis = MusicQuizzApp.MAX_TIME_SECONDS * 1000L
+        startTimerWithRemaining(remainingTimeMillis)
+    }
+    
+    private fun startTimerWithRemaining(timeMillis: Long) {
         countDownTimer?.cancel()
         
-        countDownTimer = object : CountDownTimer(MusicQuizzApp.MAX_TIME_SECONDS * 1000L, 1000) {
+        countDownTimer = object : CountDownTimer(timeMillis, 1000) {
             override fun onTick(millisUntilFinished: Long) {
+                remainingTimeMillis = millisUntilFinished
                 val seconds = (millisUntilFinished / 1000).toInt()
                 timerText.text = formatTime(seconds)
             }
 
             override fun onFinish() {
+                remainingTimeMillis = 0L
                 timerText.text = formatTime(0)
                 if (!isAnswered) {
                     handleTimeout()
                 }
             }
         }.start()
+        
+        // Also restart seekbar timer
+        if (mediaPlayer != null) {
+            setupSeekBar(mediaPlayer!!)
+        }
     }
 
     private fun formatTime(seconds: Int): String {

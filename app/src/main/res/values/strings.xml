@@ -17,6 +17,9 @@
     <string name="points">Puntos</string>
     <string name="question_label">Pregunta</string>
     <string name="question_number">Pregunta:\n%1$d/%2$d</string>
+    <string name="pause_game">Pausar</string>
+    <string name="resume_game">Continuar</string>
+    <string name="stop_game">Detener</string>
     
     <!-- Results Screen -->
     <string name="congrats">¡Felicidades!</string>
