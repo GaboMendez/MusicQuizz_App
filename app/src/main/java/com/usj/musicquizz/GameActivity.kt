@@ -24,7 +24,10 @@ class GameActivity : AppCompatActivity() {
     private var currentQuestion = 0
     private var currentScore = 0
     private var currentStreak = 0
+    private var bestStreak = 0
+    private var correctAnswers = 0
     private var questionStartTime = 0L
+    private var gameStartTime = 0L
     private var quizSongs: List<Song> = emptyList()
     private var currentOptions: List<Song> = emptyList()
     private var correctAnswer: Song? = null
@@ -122,6 +125,9 @@ class GameActivity : AppCompatActivity() {
         currentQuestion = 0
         currentScore = 0
         currentStreak = 0
+        bestStreak = 0
+        correctAnswers = 0
+        gameStartTime = System.currentTimeMillis()
         
         saveGameState()
         loadQuestion()
@@ -132,6 +138,9 @@ class GameActivity : AppCompatActivity() {
         currentQuestion = prefs.getInt("current_question", 0)
         currentScore = prefs.getInt("current_score", 0)
         currentStreak = prefs.getInt("current_streak", 0)
+        bestStreak = prefs.getInt("best_streak", 0)
+        correctAnswers = prefs.getInt("correct_answers", 0)
+        gameStartTime = prefs.getLong("game_start_time", System.currentTimeMillis())
         
         val savedSongIds = prefs.getString("quiz_songs", "")?.split(",")
             ?.mapNotNull { it.toIntOrNull() } ?: emptyList()
@@ -155,6 +164,9 @@ class GameActivity : AppCompatActivity() {
             .putInt("current_question", currentQuestion)
             .putInt("current_score", currentScore)
             .putInt("current_streak", currentStreak)
+            .putInt("best_streak", bestStreak)
+            .putInt("correct_answers", correctAnswers)
+            .putLong("game_start_time", gameStartTime)
             .putString("quiz_songs", quizSongs.mapNotNull { it.id }.joinToString(","))
             .apply()
     }
@@ -304,6 +316,10 @@ class GameActivity : AppCompatActivity() {
             val timeBonus = ((MusicQuizzApp.MAX_TIME_SECONDS - timeElapsed) / MusicQuizzApp.MAX_TIME_SECONDS * MusicQuizzApp.TIME_BONUS_MAX).toInt().coerceAtLeast(0)
             
             currentStreak++
+            correctAnswers++
+            if (currentStreak > bestStreak) {
+                bestStreak = currentStreak
+            }
             val streakBonus = (currentStreak - 1) * MusicQuizzApp.STREAK_BONUS
             
             val questionScore = MusicQuizzApp.BASE_POINTS + timeBonus + streakBonus
@@ -385,10 +401,16 @@ class GameActivity : AppCompatActivity() {
             .putBoolean("has_saved_game", false)
             .apply()
         
+        // Calculate total time played
+        val totalTimeSeconds = ((System.currentTimeMillis() - gameStartTime) / 1000).toInt()
+        
         // Navigate to results
         val intent = Intent(this, ResultsActivity::class.java)
         intent.putExtra("score", currentScore)
         intent.putExtra("total_questions", quizSongs.size)
+        intent.putExtra("correct_answers", correctAnswers)
+        intent.putExtra("best_streak", bestStreak)
+        intent.putExtra("total_time_seconds", totalTimeSeconds)
         startActivity(intent)
         finish()
     }

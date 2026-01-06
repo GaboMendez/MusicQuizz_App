@@ -17,12 +17,10 @@ class NameInputActivity : AppCompatActivity() {
 
         // Check if there's a saved game
         val prefs = getSharedPreferences("music_quizz", MODE_PRIVATE)
-        val savedName = prefs.getString("player_name", "")
         val hasSavedGame = prefs.getBoolean("has_saved_game", false)
 
-        if (!savedName.isNullOrEmpty()) {
-            binding.nameEditText.setText(savedName)
-        }
+        // Clear name input for fresh start
+        binding.nameEditText.setText("")
 
         binding.continueGameButton.isEnabled = hasSavedGame
         binding.continueGameButton.alpha = if (hasSavedGame) 1.0f else 0.5f
@@ -66,6 +64,9 @@ class NameInputActivity : AppCompatActivity() {
             .remove("current_question")
             .remove("current_score")
             .remove("current_streak")
+            .remove("best_streak")
+            .remove("correct_answers")
+            .remove("game_start_time")
             .remove("quiz_songs")
             .apply()
 

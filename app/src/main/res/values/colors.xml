@@ -38,4 +38,15 @@
     <color name="button_default_stroke">#E0E0E0</color>
     <color name="correct_answer">#4CAF50</color>
     <color name="wrong_answer">#F44336</color>
+    
+    <!-- Stats Card Colors -->
+    <color name="stat_correct_bg">#E8F5E9</color>
+    <color name="stat_correct_icon">#4CAF50</color>
+    <color name="stat_accuracy_bg">#E3F2FD</color>
+    <color name="stat_accuracy_icon">#2196F3</color>
+    <color name="stat_streak_bg">#FFF3E0</color>
+    <color name="stat_streak_icon">#FF9800</color>
+    <color name="stat_time_bg">#F3E5F5</color>
+    <color name="stat_time_icon">#9C27B0</color>
+    <color name="stat_value_text">#212121</color>
 </resources>
