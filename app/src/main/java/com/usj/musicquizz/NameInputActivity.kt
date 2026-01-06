@@ -42,13 +42,16 @@ class NameInputActivity : AppCompatActivity() {
         }
 
         binding.continueGameButton.setOnClickListener {
-            val name = binding.nameEditText.text.toString().trim()
-            if (name.isEmpty()) {
+            // Use saved player name when continuing, not the text field
+            val prefs = getSharedPreferences("music_quizz", MODE_PRIVATE)
+            val savedName = prefs.getString("player_name", "") ?: ""
+            
+            if (savedName.isEmpty()) {
                 Toast.makeText(this, getString(R.string.enter_name_hint), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            savePlayerName(name)
+            (application as MusicQuizzApp).playerName = savedName
             continueGame()
         }
     }
