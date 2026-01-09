@@ -187,7 +187,7 @@ This project is developed for educational purposes as part of the Master's progr
 
 ## 👨‍💻 Author
 
-**Gabriel** - Master's Student at USJ
+**Gabriel Méndez Reyes** - Master's Student at USJ
 
 ---
 
